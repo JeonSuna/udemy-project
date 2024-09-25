@@ -1,0 +1,14 @@
+# Created by https://www.toptal.com/developers/gitignore/api/window
+# Edit at https://www.toptal.com/developers/gitignore?templates=window
+
+#!! ERROR: window is undefined. Use list command to see defined gitignore types !!#
+
+# End of https://www.toptal.com/developers/gitignore/api/window
+node_modules/
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.log
