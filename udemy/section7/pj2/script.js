@@ -10,6 +10,10 @@ const openModal = function () {
     overlay.classList.remove('hidden')
 
 }
+const closeModal = function () {
+    modal.classList.add('hidden')
+    overlay.classList.add('hidden')
+}
 
 for (let i = 0; i < showModalBtn.length; i++){   //모든 버튼의 클릭 이벤트가 추가된다. 때문에 어떤 버튼을 눌러도 같은 값 출력
     showModalBtn[i].addEventListener('click',openModal)
@@ -20,9 +24,16 @@ for (let i = 0; i < showModalBtn.length; i++){   //모든 버튼의 클릭 이�
         // overlay.classList.remove('hidden')
     
 }
-const closeModal = function () {
-    modal.classList.add('hidden')
-    overlay.classList.add('hidden')
-}
+
 closeModalBtn.addEventListener('click', closeModal)
 
+
+document.addEventListener('keydown', function (e) {
+    //어떤 키를 누르든.. 
+    console.log(e)
+    if (e.key === 'Escape') {
+        if (!modal.classList.contains('hidden')) {
+            closeModal()
+        }
+    }
+})
