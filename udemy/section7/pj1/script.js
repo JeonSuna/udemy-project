@@ -1,6 +1,7 @@
 'use strict';
 
 let score = 20
+let highscore=0
 const sceretNumber = Math.trunc(Math.random() * 20) + 1  //함수 밖에 선언되어야한다. 클릭해도 값이 변하면 안되니
 let guessingMsg = document.querySelector('.message')
 
@@ -15,6 +16,10 @@ document.querySelector('.check').addEventListener('click', function () {
     else if (guessInput === sceretNumber) {
         guessingMsg.textContent = "정답입니다"
         document.querySelector('.number').textContent = sceretNumber
+        if (score > highscore) {
+            highscore = score
+            document.querySelector('.highscore').textContent=highscore
+        }
     }
 
     else if (guessInput !== sceretNumber)
