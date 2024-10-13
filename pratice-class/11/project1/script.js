@@ -75,6 +75,7 @@ const diplayMovements = function (movements) {
   });
 }
 
+diplayMovements(account1.movements)
 
 function createUsername(accs) {
   accs.forEach((acc) => {
@@ -85,7 +86,38 @@ function createUsername(accs) {
   })
 }
 createUsername(accounts)
-console.log(accounts)
+
+//배열 더한 값 표시하기
+const calcDisplayBalance = function (movements) {
+  const balance = movements.reduce((acc, curmov) => {
+  return  acc + curmov
+  }, 0) 
+  labelBalance.textContent = `${balance}€ ` 
+}
+calcDisplayBalance(account1.movements)
+
+
+const calcDisplaySummary = function (movements) {
+  const incomes = movements
+    .filter(mov => mov > 0)
+    .reduce((acc, cur) => acc + cur, 0)
+  labelSumIn.textContent = `${incomes}€`
+
+  const out = movements
+    .filter(mov => mov < 0)
+    .reduce((acc, cur) => acc + cur, 0)
+  labelSumOut.textContent = `${Math.abs(out)}€`
+
+  const interest = movements.filter(mov => mov > 0)
+    .map(deposit => deposit * 1.2 / 100)
+    .filter((int, i, arr) => {
+      console.log(arr)
+      return int>=1
+    })
+    .reduce((acc, cur) => acc + cur, 0)
+  labelSumInterest.textContent =`${interest}€`
+}
+calcDisplaySummary(account1.movements)
 
 
 /////////////////////////////////////////////////
@@ -179,3 +211,22 @@ const movementDescript = movements.map((mov, index, arr) => {
   }
 })
 console.log(movementDescript)
+
+//Maximum value
+const max = movements.reduce((acc, mov) => {
+  if (acc > mov)
+    return acc //현재값은 두번째 요소인 450임
+  else {
+    return mov
+  }
+}, movements[0])
+console.log(max)
+
+const eurToUsd = 1.1
+
+//pipeline
+const totalDepositedUSD = movements
+  .filter(mov => mov > 0)
+  .map(mov => mov * eurToUsd)
+  .reduce((acc, mov) => acc + mov, 0)
+  console.log(totalDepositedUSD) //5522.00000001
